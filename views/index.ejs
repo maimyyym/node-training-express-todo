@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>My ToDo!!!!!</title>
+    </head>
+    <body>
+        <h1>My ToDo!!!!!</h1>
+        <form action="/add" method="POST">
+            <input type="text" name="title">
+            <button type="submit">Add</button>
+        </form>
+        <% if (tasks.length) { %>
+            <ul>
+            <% tasks.forEach((task) => { %>
+            <li>
+                <%= task.title %>
+                    <form action="/delete/<%= task.id %>" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">削除</button>
+                    </form>
+                <% if (task.done !== 1) { %>
+                    <form action="/done/<%= task.id %>" method="POST">
+                    <input type="hidden" name="done" value="1">
+                    <button type="submit">完了</button>
+                    </form>
+                <% } else { %>
+                    <p>完了済</p>
+                    <form action="/done/<%= task.id %>" method="POST">
+                    <input type="hidden" name="done" value="0">
+                    <button type="submit">タスクに戻す</button>
+                    </form>
+                    <% } %>
+                <form action="/update/<%= task.id %>" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="text" name="update_title">
+                    <button type="submit">タスク名変更</button>
+                </form>
+            </li>
+            <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No tasks!!</p>
+        <%  } %>
+    </body>
+</html>
