@@ -3,23 +3,49 @@
     <head>
         <meta charset="UTF-8">
         <title>My ToDo!!!!!</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
-    <body>
+<body>
+    <header>
         <h1>My ToDo!!!!!</h1>
-        <form action="/add" method="POST">
-            <input type="text" name="title">
-            <button type="submit">Add</button>
-        </form>
-        <% if (tasks.length) { %>
-            <ul>
-            <% tasks.forEach((task) => { %>
-            <li>
-                <%= task.title %>
+    </header>
+    <main>
+        <div class="content">
+            <div class="add_task">
+                <form action="/add" method="POST">
+                    <input type="text" name="title">
+                    <button type="submit">Add</button>
+                </form>   
+            </div>
+            <div class="task_list">
+                <% if (tasks.length) { %>
+                <ul>
+                <% tasks.forEach((task) => { %>
+                <li>
+                <div class="title">
+                <p><%= task.title %></p>
+                </div>
+                <div class="button_box">
                     <form action="/delete/<%= task.id %>" method="POST">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit">削除</button>
                     </form>
-                <% if (task.done !== 1) { %>
+                    <!-- 分割予定 -->
+                    <button id="edit_modal_button_<%= task.id %>" data-taskid="<%= task.id %>">編集</button>
+
+
+                    <div class="modal" id ="edit_modal_<%= task.id %>" data-taskid="<%= task.id %>"> 
+                        <div class="modal_content">
+                            <h2>Task Edit!!!!!</h2>
+                            <form action="/update/<%= task.id %>" method="POST">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="text" name="update_title">
+                                <button type="submit">タスク名変更</button>
+                            </form>
+                            <a href="/" id="edit_modal_close_<%= task.id %>" data-taskIi="<%= task.id %>">×</a>
+                        </div>
+                    </div>
+                    <% if (task.done !== 1) { %>
                     <form action="/done/<%= task.id %>" method="POST">
                     <input type="hidden" name="done" value="1">
                     <button type="submit">完了</button>
@@ -30,17 +56,17 @@
                     <input type="hidden" name="done" value="0">
                     <button type="submit">タスクに戻す</button>
                     </form>
-                    <% } %>
-                <form action="/update/<%= task.id %>" method="POST">
-                    <input type="hidden" name="_method" value="PUT">
-                    <input type="text" name="update_title">
-                    <button type="submit">タスク名変更</button>
-                </form>
-            </li>
-            <% }); %>
-            </ul>
-        <% } else { %>
-            <p>No tasks!!</p>
-        <%  } %>
-    </body>
+                </div>
+                <% } %>
+                </li>
+                <% }); %>
+                </ul>
+                <% } else { %>
+                    <p>No tasks!!</p>
+                <%  } %>
+            </div>
+        </div>
+    </main>
+</body>
+    <script src="js/modal.js"></script>
 </html>

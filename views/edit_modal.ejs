@@ -1,0 +1,11 @@
+<div class="modal" id ="edit_modal"> 
+    <div class="modal_content">
+        <h2>Task Edit!!!!!</h2>
+        <form action="/update/<%= task.id %>" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="update_title">
+            <button type="submit">タスク名変更</button>
+        </form>
+        <a href="/" id="edit_modal_close">×</a>
+    </div>
+</div>

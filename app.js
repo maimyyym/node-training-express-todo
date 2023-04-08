@@ -5,6 +5,7 @@ const app = express();
 app.set('view engine', 'ejs')  //このコードの意味を調べる
 
 app.use(express.urlencoded({ extended: true })); //このコードの意味を調べる
+app.use(express.static('static'));
 
 // DB接続設定
 const connection = mysql.createConnection({
