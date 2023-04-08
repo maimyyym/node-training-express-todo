@@ -36,12 +36,13 @@ h2 {
 button {
     display: block;
     margin: 0.3rem;
-    padding: 0.2rem;
+    padding: 0.5em;
     text-align: center;
-    border: solid skyblue 2px;
+    border: solid skyblue 1.5px;
     background-color: aliceblue;
     color: skyblue;
     transition: 0.5s;
+    border-radius: 0.3em;
 }
 
 button:hover {
@@ -76,10 +77,41 @@ button:hover {
     align-items: flex-start;
 }
 
+.title p {
+    border-bottom: solid 1px skyblue;
+}
+
+.title p::before {
+    content: '▶︎▶︎ ';
+    font-size: smaller;
+    color: gray;
+}
+
 .button_box {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+form {
+    display: flex;
+}
+
+input {
+    padding: 0.5em;
+    margin: 1em;
+    border: solid 1px gray;
+    width: 200px;
+}
+
+input:focus {
+    outline: none;
+    border: solid 1px skyblue;
+}
+
+form button {
+    margin: 1em;
+    padding: 0.5em;
 }
 
 .modal {
@@ -108,5 +140,23 @@ button:hover {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    
+    border: double 4px skyblue;
+    border-radius: 0.3em;
+}
+
+
+
+.modal_content p {
+    position: absolute;
+    top:2px;
+    right: 20px;
+    font-size: medium;
+}
+
+.modal_task_title {
+    position: absolute;
+    color: gray;
+    font-size: smaller;
+    top: 150px;
+    margin-left: 100px;
 }
